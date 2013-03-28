@@ -18,8 +18,13 @@
 
 * [Menu]->[File]->[Export]
 * if works without, the information for thumbnail creation be at text field.
-* The default output directory is your Desktop
-  ex: ~/Desktop/<filename>_<width>x<height>.jpg
+* The default output directory is your Desktop with filename format
+
+```
+format: {filename}_{width}x{height}.jpg
+
+ex: ~/Desktop/{filename}_{width}x{height}.jpg
+```
   
 ## License
 
