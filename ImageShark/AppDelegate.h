@@ -26,6 +26,6 @@
 @property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 @property (strong, nonatomic)           NSString *dispMessages;
 
-- (IBAction)saveAction:(id)sender;
+- (void)openImageURL: (NSURL*)url;
 
 @end

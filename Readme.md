@@ -4,15 +4,20 @@
 
 ### Features
 * extract exif and gps info
-* convert jpg thumbnail in width or height --> 512
+* convert jpg thumbnail in width or height in 512
+* Single File drag and drop
 
 ## Howto
 
 ### load new image
 
+#### File open
 * [Menu]->[File]->[Open]
 * select your file. 
 * if image loads successfully, info will be right-side text field.
+
+### File drag and drop
+* support drag and dop a single image file from Finder.app to this app.
 
 ### export thumbnail
 
