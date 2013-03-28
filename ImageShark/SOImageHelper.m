@@ -4,11 +4,13 @@
 //
 //  Created by ben wei on 3/26/13.
 //  Copyright (c) 2013 Staros Mobi. All rights reserved.
-//
+//  License: Simple BSD https://github.com/benwei/ImageShark/blob/master/License.txt
 
 #import "SOImageHelper.h"
 
-@implementation SOImageHelper
+@implementation SOImageHelper {
+    CGImageSourceRef    isr;
+}
 
 - (id)init {
     self = [super init];
@@ -29,8 +31,7 @@
 
 - (void) loadImageWithURL: (NSURL*)url
 {
-    // use ImageIO to get the CGImage, image properties, and the image-UTType
-    CGImageSourceRef    isr = CGImageSourceCreateWithURL( (__bridge CFURLRef)url, NULL);
+    isr = CGImageSourceCreateWithURL( (__bridge CFURLRef)url, NULL);
     
     if (isr)
     {
@@ -46,8 +47,6 @@
             
             _UTType = (__bridge NSString*)CGImageSourceGetType(isr);
         }
-		CFRelease(isr);
-        
     }
 
 }
@@ -69,37 +68,21 @@
     return true;
 }
 
-- (NSImage *)imageResize:(NSImage*)anImage
-                 newSize:(NSSize)newSize
-{
-    NSImage *sourceImage = anImage;
-    [sourceImage setScalesWhenResized:YES];
-    
-    // Report an error if the source isn't a valid image
-    if (![sourceImage isValid])
-    {
-        NSLog(@"Invalid Image");
-    } else
-    {
-        NSImage *smallImage = [[NSImage alloc] initWithSize: newSize];
-        [smallImage lockFocus];
-        [sourceImage setSize: newSize];
-        [[NSGraphicsContext currentContext] setImageInterpolation:NSImageInterpolationHigh];
-        [sourceImage compositeToPoint:NSZeroPoint operation:NSCompositeCopy];
-        [smallImage unlockFocus];
-        return smallImage;
-    }
-    return nil;
-}
-
 // small/medium
 #define IMAGE_SIZE_SMALL 512
+#define IMAGE_SIZE_MEDIUM 1024
+
 #define SOUI_INTERFACE_ORIENTATION_PORTRAIT  0
 #define SOUI_INTERFACE_ORIENTATION_LANDSCAPE 1
 
 - (BOOL) saveSmallThumbnail:(NSString*) resourceName
 {
     return [self imageResizeToFile:resourceName withLongSize: IMAGE_SIZE_SMALL];
+}
+
+- (BOOL) saveMediumThumbnail:(NSString*) resourceName
+{
+    return [self imageResizeToFile:resourceName withLongSize: IMAGE_SIZE_MEDIUM];
 }
 
 - (BOOL) imageResizeToFile: (NSString*) resourceName withLongSize: (size_t) longSize
@@ -124,40 +107,41 @@
     // don't need to resize, it is small one.
     if (longSize < IMAGE_SIZE_SMALL) {
         self.thumbnailName = [NSString stringWithFormat:@"%@.jpg", resourceName];
+        self.thumbnailSize = size;
+        return [self saveJPGFileWithSize:self.image withPath: self.thumbnailName withSize:size];
     } else {
-        if (orientation == SOUI_INTERFACE_ORIENTATION_PORTRAIT) {
-            size.height = IMAGE_SIZE_SMALL;
-            size.width  = (size.height * width) / height;
-        } else {
-            size.width  = IMAGE_SIZE_SMALL;
-            size.height  = (size.width * height) / width;
-        }
+        // handle the correct rotation of thumbnail
+        CGImageRef imageThumbnail = CGImageSourceCreateThumbnailAtIndex(isr, 0,
+                                        (__bridge CFDictionaryRef)[NSDictionary dictionaryWithObjectsAndKeys:
+                                                                   [NSNumber numberWithInt: IMAGE_SIZE_SMALL],  kCGImageSourceThumbnailMaxPixelSize,
+                                                                   (id)kCFBooleanTrue,                       kCGImageSourceCreateThumbnailWithTransform,
+                                                                   (id)kCFBooleanTrue,                       kCGImageSourceCreateThumbnailFromImageAlways,
+                                                                   NULL]);
 
+        height = CGImageGetHeight(imageThumbnail);
+        width = CGImageGetWidth(imageThumbnail);
+        size = NSMakeSize(width, height);
         self.thumbnailName = [NSString stringWithFormat:@"%@_%.0fx%.0f.jpg", resourceName, size.width, size.height];
+        return [self saveJPGFileWithSize:imageThumbnail withPath: self.thumbnailName withSize:size];
     }
-    self.thumbnailSize = size;
-    return [self saveJPGFileWithSize:self.thumbnailName withSize:size];
 }
 
-- (BOOL) saveJPGFileWithSize: (NSString *) pathName withSize: (NSSize) size;
+- (BOOL) saveJPGFileWithSize: (CGImageRef) imageSrc withPath: (NSString *) pathName withSize: (NSSize) size;
 {
-    NSImage *handle = [[NSImage alloc] initWithCGImage:self.image size:size];
-    if (!handle)
-    {
-        return false;
+
+    BOOL retflg = NO;
+    NSImage *dest = [[NSImage alloc] initWithCGImage:imageSrc size:size];
+    if (!dest) {
+        return retflg;
     }
 
-    NSArray *reps = [handle representations];
-
-    [handle lockFocusOnRepresentation:[reps objectAtIndex:0]];
-    NSBitmapImageRep *rep = [[NSBitmapImageRep alloc] initWithFocusedViewRect:NSMakeRect(0.0, 0.0, size.width, size.height)];
-    [handle unlockFocus];
+    [dest lockFocus];
+    NSBitmapImageRep *rep = [NSBitmapImageRep imageRepWithData:[dest TIFFRepresentation]];
+    NSData *data = [rep representationUsingType:NSJPEGFileType properties: _properties];
+    retflg = [data writeToFile:pathName atomically:NO];
+    [dest unlockFocus];
     
-    NSData *data = [rep representationUsingType:NSJPEGFileType properties:self.properties];
-    
-    [data writeToFile:pathName atomically:NO];
-    
-    return true;
+    return retflg;
 }
 
 @end

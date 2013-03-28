@@ -57,10 +57,10 @@
 		5138B93A1703EC0D00525237 /* ImageSharkTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ImageSharkTests.m; sourceTree = "<group>"; };
 		5138B9441703EC8A00525237 /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
 		5138B9451703EC8A00525237 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		5138B9481703ECA000525237 /* SOImageHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOImageHelper.h; sourceTree = "<group>"; };
-		5138B9491703ECA000525237 /* SOImageHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOImageHelper.m; sourceTree = "<group>"; };
-		5138B94F1704225900525237 /* SODragDropImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SODragDropImageView.h; sourceTree = "<group>"; };
-		5138B9501704225900525237 /* SODragDropImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SODragDropImageView.m; sourceTree = "<group>"; };
+		5138B9481703ECA000525237 /* SOImageHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SOImageHelper.h; path = ImageShark/SOImageHelper.h; sourceTree = "<group>"; };
+		5138B9491703ECA000525237 /* SOImageHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SOImageHelper.m; path = ImageShark/SOImageHelper.m; sourceTree = "<group>"; };
+		5138B94F1704225900525237 /* SODragDropImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SODragDropImageView.h; path = ImageShark/SODragDropImageView.h; sourceTree = "<group>"; };
+		5138B9501704225900525237 /* SODragDropImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SODragDropImageView.m; path = ImageShark/SODragDropImageView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +89,7 @@
 		5138B9011703EC0D00525237 = {
 			isa = PBXGroup;
 			children = (
+				5138B95217043FCD00525237 /* SOLib */,
 				5138B9131703EC0D00525237 /* ImageShark */,
 				5138B9331703EC0D00525237 /* ImageSharkTests */,
 				5138B90C1703EC0D00525237 /* Frameworks */,
@@ -130,10 +131,6 @@
 		5138B9131703EC0D00525237 /* ImageShark */ = {
 			isa = PBXGroup;
 			children = (
-				5138B94F1704225900525237 /* SODragDropImageView.h */,
-				5138B9501704225900525237 /* SODragDropImageView.m */,
-				5138B9481703ECA000525237 /* SOImageHelper.h */,
-				5138B9491703ECA000525237 /* SOImageHelper.m */,
 				5138B91F1703EC0D00525237 /* AppDelegate.h */,
 				5138B9201703EC0D00525237 /* AppDelegate.m */,
 				5138B9221703EC0D00525237 /* MainMenu.xib */,
@@ -172,6 +169,17 @@
 				5138B9361703EC0D00525237 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		5138B95217043FCD00525237 /* SOLib */ = {
+			isa = PBXGroup;
+			children = (
+				5138B94F1704225900525237 /* SODragDropImageView.h */,
+				5138B9501704225900525237 /* SODragDropImageView.m */,
+				5138B9481703ECA000525237 /* SOImageHelper.h */,
+				5138B9491703ECA000525237 /* SOImageHelper.m */,
+			);
+			name = SOLib;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
