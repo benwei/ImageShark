@@ -10,9 +10,8 @@
 #import <AppKit/AppKit.h>
 
 @interface SODragDropImageView : NSImageView <NSDraggingDestination>
-{
-    BOOL highlightWithFrame;
-}
+
+@property (strong, nonatomic) NSNumber *lineWidthForHighlightFrame;
 
 - (id) initWithCoder: (NSCoder *) coder;
 

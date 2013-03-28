@@ -4,7 +4,7 @@
 //
 //  Created by ben wei on 3/26/13.
 //  Copyright (c) 2013 Staros Mobi. All rights reserved.
-//
+//  License: Simple BSD https://github.com/benwei/ImageShark/blob/master/License.txt
 
 #import "SOImageHelper.h"
 
@@ -29,7 +29,6 @@
 
 - (void) loadImageWithURL: (NSURL*)url
 {
-    // use ImageIO to get the CGImage, image properties, and the image-UTType
     CGImageSourceRef    isr = CGImageSourceCreateWithURL( (__bridge CFURLRef)url, NULL);
     
     if (isr)
