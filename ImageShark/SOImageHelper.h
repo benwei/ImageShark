@@ -22,9 +22,13 @@
 @property (strong, nonatomic) NSString*     thumbnailName;
 
 - (id) initWithUrl: (NSURL *) url;
+
 - (BOOL) WriteCGImageToFile: (CGImageRef) image path: (NSString *)path;
+
 - (BOOL) imageResizeToFile: (NSString*) resourceName  withLongSize: (size_t) longSize;
 
+// Thumbnail Creation
 - (BOOL) saveSmallThumbnail:(NSString*) resourceName;
+- (BOOL) saveMediumThumbnail:(NSString*) resourceName;
 
 @end
