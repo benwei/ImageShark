@@ -9,13 +9,18 @@
 #import "SODragDropImageView.h"
 #import "AppDelegate.h"
 
-@implementation SODragDropImageView
+@implementation SODragDropImageView {
+    BOOL highlightWithFrame;
+}
+
+#define SO_LINE_WITH_FOR_HIGHLIGHT_FRAME 3
 
 - (id) initWithCoder: (NSCoder *)coder
 {
     self=[super initWithCoder:coder];
     if ( self ) {
         [self registerForDraggedTypes:[NSImage imagePasteboardTypes]];
+        _lineWidthForHighlightFrame = [NSNumber numberWithInteger:SO_LINE_WITH_FOR_HIGHLIGHT_FRAME];
     }
     return self;
 }
@@ -79,7 +84,7 @@
     [super drawRect:rect];
     if ( highlightWithFrame ) {
         [[NSColor redColor] set];
-        [NSBezierPath setDefaultLineWidth: 3];
+        [NSBezierPath setDefaultLineWidth: [_lineWidthForHighlightFrame intValue]];
         [NSBezierPath strokeRect: rect];
     }
 }
