@@ -36,14 +36,20 @@ Steps for submit your contribute
 
 * new branch from develop
 
-  ```ex: git flow feature start <your feature>```
+  ```
+  ex: git flow feature start <your feature>
+  ```
 * add your modification to your feature branch
 
-* after complete merger you code to develop   
+* after complete merger you code to develop
 
-  ```ex: git flow feature publish <your feature>```
-  
-  ```important: before push your code, please help to use git rebase to compose your commits into one. It would be helpful for code review.``` 
+  ```
+  ex: git flow feature publish <your feature>
+
+  important: before push your code, please help to use git rebase
+  to compose your commits into one. It would be helpful for code review.
+  ``` 
+
 * finally, open a pull request to your feature branch.
 
 
