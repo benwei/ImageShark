@@ -21,6 +21,7 @@
 		5138B9461703EC8A00525237 /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5138B9441703EC8A00525237 /* Quartz.framework */; };
 		5138B9471703EC8A00525237 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5138B9451703EC8A00525237 /* QuartzCore.framework */; };
 		5138B94A1703ECA000525237 /* SOImageHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 5138B9491703ECA000525237 /* SOImageHelper.m */; };
+		5138B9511704225900525237 /* SODragDropImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5138B9501704225900525237 /* SODragDropImageView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +59,8 @@
 		5138B9451703EC8A00525237 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		5138B9481703ECA000525237 /* SOImageHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOImageHelper.h; sourceTree = "<group>"; };
 		5138B9491703ECA000525237 /* SOImageHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOImageHelper.m; sourceTree = "<group>"; };
+		5138B94F1704225900525237 /* SODragDropImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SODragDropImageView.h; sourceTree = "<group>"; };
+		5138B9501704225900525237 /* SODragDropImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SODragDropImageView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,6 +130,8 @@
 		5138B9131703EC0D00525237 /* ImageShark */ = {
 			isa = PBXGroup;
 			children = (
+				5138B94F1704225900525237 /* SODragDropImageView.h */,
+				5138B9501704225900525237 /* SODragDropImageView.m */,
 				5138B9481703ECA000525237 /* SOImageHelper.h */,
 				5138B9491703ECA000525237 /* SOImageHelper.m */,
 				5138B91F1703EC0D00525237 /* AppDelegate.h */,
@@ -281,6 +286,7 @@
 				5138B9211703EC0D00525237 /* AppDelegate.m in Sources */,
 				5138B9271703EC0D00525237 /* ImageShark.xcdatamodeld in Sources */,
 				5138B94A1703ECA000525237 /* SOImageHelper.m in Sources */,
+				5138B9511704225900525237 /* SODragDropImageView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
