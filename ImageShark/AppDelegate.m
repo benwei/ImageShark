@@ -19,23 +19,6 @@
 @synthesize managedObjectContext = _managedObjectContext;
 
 
-- (void)openImageURL: (NSURL*)url
-{
-    // use ImageIO to get the CGImage, image properties, and the image-UTType
-    //
-    helper = [[SOImageHelper alloc] initWithUrl:url];
-    
-    if (helper.image)
-    {
-        [_imageView setImage: helper.image
-             imageProperties: helper.properties];
-
-        [_detail setStringValue:[NSString stringWithFormat:@"exif=%@\rGPS=%@", helper.exif, helper.gps]];
-        
-        [_window setTitleWithRepresentedFilename: [url path]];
-    }
-}
-
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
@@ -152,20 +135,6 @@
     return [[self managedObjectContext] undoManager];
 }
 
-// Performs the save action for the application, which is to send the save: message to the application's managed object context. Any encountered errors are presented to the user.
-- (IBAction)saveAction:(id)sender
-{
-    NSError *error = nil;
-    
-    if (![[self managedObjectContext] commitEditing]) {
-        NSLog(@"%@:%@ unable to commit editing before saving", [self class], NSStringFromSelector(_cmd));
-    }
-    
-    if (![[self managedObjectContext] save:&error]) {
-        [[NSApplication sharedApplication] presentError:error];
-    }
-}
-
 - (NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication *)sender
 {
     // Save changes in the application's managed object context before the application terminates.
@@ -236,12 +205,27 @@
 	}];
 }
 
+- (void)openImageURL: (NSURL*)url
+{
+    fileUrl = url;
+    helper = [[SOImageHelper alloc] initWithUrl:url];
+    
+    if (helper.image)
+    {
+        [_imageView setImage: helper.image
+             imageProperties: helper.properties];
+        [_detail setStringValue:[NSString stringWithFormat:@"exif=%@\rGPS=%@", helper.exif, helper.gps]];
+        
+        [_window setTitleWithRepresentedFilename: [url path]];
+    }
+}
+
 - (IBAction)exportTo:(id)sender
 {
     NSString *fileName = [[fileUrl path] lastPathComponent];
     NSString *fileNameOnly = [[fileName lastPathComponent] stringByDeletingPathExtension];
     
-    NSString *exportResName = [NSString stringWithFormat:@"%@/%@", NSHomeDirectory(), fileNameOnly];
+    NSString *exportResName = [NSString stringWithFormat:@"%@/Desktop/%@", NSHomeDirectory(), fileNameOnly];
 
     NSString *msg = nil;
     
