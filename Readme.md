@@ -25,7 +25,23 @@ format: {filename}_{width}x{height}.jpg
 
 ex: ~/Desktop/{filename}_{width}x{height}.jpg
 ```
-  
+
+## Contribute
+* This project uses Vincent Driessen's [branching model](http://nvie.com/posts/a-successful-git-branching-model/) and [gitflow](https://github.com/nvie/gitflow.git) tool
+Steps for submit your contribute
+* fork this repository
+* new branch from develop
+
+  ```ex: git flow feature start your-feature```
+* add your modification to your feature branch
+* after complete merger you code to develop   
+
+  ```ex: git flow feature finish your-feature```
+* push your develop code to github
+
+  ```important: before push your code, please help to use git rebase to compose your commits into one. It would be helpful for code review.``` 
+* finally, submit a pull request to me
+
 ## License
 
 * [Simplified BSD License](http://en.wikipedia.org/wiki/BSD_licenses)
