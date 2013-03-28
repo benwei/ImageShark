@@ -1,0 +1,8 @@
+
+# Xcode Config
+*.xcuserdatad
+*.xcworkspacedata
+*.xcuserstate
+
+# build
+build

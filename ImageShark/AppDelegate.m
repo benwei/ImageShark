@@ -2,24 +2,56 @@
 //  AppDelegate.m
 //  ImageShark
 //
-//  Created by ben wei on 3/28/13.
+//  Created by ben wei on 3/14/13.
 //  Copyright (c) 2013 Staros Mobi. All rights reserved.
 //
 
+#import "SOImageHelper.h"
 #import "AppDelegate.h"
 
-@implementation AppDelegate
+@implementation AppDelegate {
+    SOImageHelper *helper;
+    NSURL *fileUrl;
+}
 
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
 @synthesize managedObjectModel = _managedObjectModel;
 @synthesize managedObjectContext = _managedObjectContext;
 
-- (void)applicationDidFinishLaunching:(NSNotification *)aNotification
+
+- (void)openImageURL: (NSURL*)url
 {
-    // Insert code here to initialize your application
+    // use ImageIO to get the CGImage, image properties, and the image-UTType
+    //
+    helper = [[SOImageHelper alloc] initWithUrl:url];
+    
+    if (helper.image)
+    {
+        [_imageView setImage: helper.image
+             imageProperties: helper.properties];
+
+        [_detail setStringValue:[NSString stringWithFormat:@"exif=%@\rGPS=%@", helper.exif, helper.gps]];
+        
+        [_window setTitleWithRepresentedFilename: [url path]];
+    }
 }
 
-// Returns the directory the application uses to store the Core Data store file. This code uses a directory named "mobi.staros.apps.ImageShark" in the user's Application Support directory.
+
+- (void)applicationDidFinishLaunching:(NSNotification *)aNotification
+{
+    _dispMessages = @"open your photo first to display EXIF and GPS info\r\
+* load new image by [File]->[Open]\r\
+ - select your file. if image loads successfully and exif or gps exists,\r\
+   info will be right-side text field.\r\
+* export thumbnail by [File]->[Export]\r\
+ - if works, output info in text field and thumbnail in\r\
+   ~/Desktop/<filename>_<width>x<height>.jpg";
+
+    [_detail setStringValue:_dispMessages];
+}
+
+// Returns the directory the application uses to store the Core Data store file.
+// This code uses a directory named "mobi.staros.apps.ImageShark" in the user's Application Support directory.
 - (NSURL *)applicationFilesDirectory
 {
     NSFileManager *fileManager = [NSFileManager defaultManager];
@@ -178,6 +210,55 @@
     }
 
     return NSTerminateNow;
+}
+
+#pragma mark -------- file opening
+
+
+- (IBAction)openImage: (id)sender
+{
+    // present open panel...
+    
+    NSString *    extensions = @"tiff/tif/TIFF/TIF/jpg/jpeg/JPG/JPEG/png/PNG";
+    NSArray *     types = [extensions pathComponents];
+    
+	// Let the user choose an output file, then start the process of writing samples
+	NSOpenPanel *openPanel = [NSOpenPanel openPanel];
+	[openPanel setAllowedFileTypes:types/*[NSArray arrayWithObject:AVFileTypeQuickTimeMovie]*/];
+	[openPanel setCanSelectHiddenExtension:YES];
+	[openPanel beginSheetModalForWindow:_window completionHandler:^(NSInteger result) {
+		if (result == NSFileHandlingPanelOKButton)
+        {
+            // user did select an image...
+            fileUrl = [openPanel URL];
+            [self openImageURL: fileUrl];
+        }
+	}];
+}
+
+- (IBAction)exportTo:(id)sender
+{
+    NSString *fileName = [[fileUrl path] lastPathComponent];
+    NSString *fileNameOnly = [[fileName lastPathComponent] stringByDeletingPathExtension];
+    
+    NSString *exportResName = [NSString stringWithFormat:@"%@/%@", NSHomeDirectory(), fileNameOnly];
+
+    NSString *msg = nil;
+    
+    if ([helper saveSmallThumbnail:exportResName]) {
+        msg = [NSString stringWithFormat:@"Source:%@\r\routput:%@\r\rOrigin Size: (%.0f,%.0f)\r\rThumbnail Size: (%.0f,%.0f)",
+         fileUrl, helper.thumbnailName,
+         helper.imageSize.width,
+         helper.imageSize.height,
+         helper.thumbnailSize.width,
+         helper.thumbnailSize.height];
+    } else {
+        msg = [NSString stringWithFormat:@"Error: export %@ To %@", fileUrl, helper.thumbnailName];
+    }
+
+    if (msg) {
+        [_detail setStringValue:msg];
+    }
 }
 
 @end

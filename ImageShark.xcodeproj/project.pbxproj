@@ -18,6 +18,9 @@
 		5138B9301703EC0D00525237 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5138B90D1703EC0D00525237 /* Cocoa.framework */; };
 		5138B9381703EC0D00525237 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5138B9361703EC0D00525237 /* InfoPlist.strings */; };
 		5138B93B1703EC0D00525237 /* ImageSharkTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5138B93A1703EC0D00525237 /* ImageSharkTests.m */; };
+		5138B9461703EC8A00525237 /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5138B9441703EC8A00525237 /* Quartz.framework */; };
+		5138B9471703EC8A00525237 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5138B9451703EC8A00525237 /* QuartzCore.framework */; };
+		5138B94A1703ECA000525237 /* SOImageHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 5138B9491703ECA000525237 /* SOImageHelper.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +54,10 @@
 		5138B9371703EC0D00525237 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		5138B9391703EC0D00525237 /* ImageSharkTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImageSharkTests.h; sourceTree = "<group>"; };
 		5138B93A1703EC0D00525237 /* ImageSharkTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ImageSharkTests.m; sourceTree = "<group>"; };
+		5138B9441703EC8A00525237 /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
+		5138B9451703EC8A00525237 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		5138B9481703ECA000525237 /* SOImageHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOImageHelper.h; sourceTree = "<group>"; };
+		5138B9491703ECA000525237 /* SOImageHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOImageHelper.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +65,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5138B9461703EC8A00525237 /* Quartz.framework in Frameworks */,
+				5138B9471703EC8A00525237 /* QuartzCore.framework in Frameworks */,
 				5138B90E1703EC0D00525237 /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -96,6 +105,8 @@
 		5138B90C1703EC0D00525237 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5138B9441703EC8A00525237 /* Quartz.framework */,
+				5138B9451703EC8A00525237 /* QuartzCore.framework */,
 				5138B90D1703EC0D00525237 /* Cocoa.framework */,
 				5138B92E1703EC0D00525237 /* SenTestingKit.framework */,
 				5138B90F1703EC0D00525237 /* Other Frameworks */,
@@ -116,6 +127,8 @@
 		5138B9131703EC0D00525237 /* ImageShark */ = {
 			isa = PBXGroup;
 			children = (
+				5138B9481703ECA000525237 /* SOImageHelper.h */,
+				5138B9491703ECA000525237 /* SOImageHelper.m */,
 				5138B91F1703EC0D00525237 /* AppDelegate.h */,
 				5138B9201703EC0D00525237 /* AppDelegate.m */,
 				5138B9221703EC0D00525237 /* MainMenu.xib */,
@@ -267,6 +280,7 @@
 				5138B91A1703EC0D00525237 /* main.m in Sources */,
 				5138B9211703EC0D00525237 /* AppDelegate.m in Sources */,
 				5138B9271703EC0D00525237 /* ImageShark.xcdatamodeld in Sources */,
+				5138B94A1703ECA000525237 /* SOImageHelper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -456,6 +470,7 @@
 				5138B9401703EC0D00525237 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		5138B9411703EC0D00525237 /* Build configuration list for PBXNativeTarget "ImageSharkTests" */ = {
 			isa = XCConfigurationList;
@@ -464,6 +479,7 @@
 				5138B9431703EC0D00525237 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
