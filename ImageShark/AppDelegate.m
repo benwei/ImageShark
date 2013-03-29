@@ -12,6 +12,7 @@
 @implementation AppDelegate {
     SOImageHelper *helper;
     NSURL *fileUrl;
+    NSString *targetExportPath;
 }
 
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
@@ -22,6 +23,9 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
+    helper = nil;
+    targetExportPath = [NSString stringWithFormat:@"%@/Desktop", NSHomeDirectory()];
+    [_exportPath setStringValue:targetExportPath];
     _dispMessages = @"open your photo first to display EXIF and GPS info\r\
 * load new image by [File]->[Open]\r\
  - select your file. if image loads successfully and exif or gps exists,\r\
@@ -222,11 +226,14 @@
 
 - (IBAction)exportTo:(id)sender
 {
+    if (!helper) {
+        [_detail setStringValue:@"Please open your image at first."];
+        return;
+    }
+
     NSString *fileName = [[fileUrl path] lastPathComponent];
     NSString *fileNameOnly = [[fileName lastPathComponent] stringByDeletingPathExtension];
-    
-    NSString *exportResName = [NSString stringWithFormat:@"%@/Desktop/%@", NSHomeDirectory(), fileNameOnly];
-
+    NSString *exportResName = [NSString stringWithFormat:@"%@/%@", targetExportPath, fileNameOnly];
     NSString *msg = nil;
     
     if ([helper saveSmallThumbnail:exportResName]) {
@@ -243,6 +250,12 @@
     if (msg) {
         [_detail setStringValue:msg];
     }
+}
+
+- (IBAction) browseExportFolder:(id)sender
+{
+    NSURL *url = [NSURL fileURLWithPath:targetExportPath];
+    [[NSWorkspace sharedWorkspace] openURL:url];
 }
 
 @end

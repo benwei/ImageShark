@@ -92,6 +92,7 @@
     NSSize size = NSMakeSize(width, height);
     int orientation = SOUI_INTERFACE_ORIENTATION_PORTRAIT;
     self.imageSize = size;
+    CGImageRef targetImage = self.image;
 
     if (longSize == 0) {
         longSize = IMAGE_SIZE_SMALL;
@@ -108,22 +109,22 @@
     if (longSize < IMAGE_SIZE_SMALL) {
         self.thumbnailName = [NSString stringWithFormat:@"%@.jpg", resourceName];
         self.thumbnailSize = size;
-        return [self saveJPGFileWithSize:self.image withPath: self.thumbnailName withSize:size];
     } else {
         // handle the correct rotation of thumbnail
-        CGImageRef imageThumbnail = CGImageSourceCreateThumbnailAtIndex(isr, 0,
-                                        (__bridge CFDictionaryRef)[NSDictionary dictionaryWithObjectsAndKeys:
-                                                                   [NSNumber numberWithInt: IMAGE_SIZE_SMALL],  kCGImageSourceThumbnailMaxPixelSize,
-                                                                   (id)kCFBooleanTrue,                       kCGImageSourceCreateThumbnailWithTransform,
-                                                                   (id)kCFBooleanTrue,                       kCGImageSourceCreateThumbnailFromImageAlways,
-                                                                   NULL]);
+        targetImage = CGImageSourceCreateThumbnailAtIndex(isr, 0,
+                            (__bridge CFDictionaryRef)[NSDictionary dictionaryWithObjectsAndKeys:
+                                                       [NSNumber numberWithInt: IMAGE_SIZE_SMALL],  kCGImageSourceThumbnailMaxPixelSize,
+                                                       (id)kCFBooleanTrue,                       kCGImageSourceCreateThumbnailWithTransform,
+                                                       (id)kCFBooleanTrue,                       kCGImageSourceCreateThumbnailFromImageAlways,
+                                                       NULL]);
 
-        height = CGImageGetHeight(imageThumbnail);
-        width = CGImageGetWidth(imageThumbnail);
+        height = CGImageGetHeight(targetImage);
+        width = CGImageGetWidth(targetImage);
         size = NSMakeSize(width, height);
         self.thumbnailName = [NSString stringWithFormat:@"%@_%.0fx%.0f.jpg", resourceName, size.width, size.height];
-        return [self saveJPGFileWithSize:imageThumbnail withPath: self.thumbnailName withSize:size];
     }
+    self.thumbnailSize = size;
+    return [self saveJPGFileWithSize:targetImage withPath: self.thumbnailName withSize:size];
 }
 
 - (BOOL) saveJPGFileWithSize: (CGImageRef) imageSrc withPath: (NSString *) pathName withSize: (NSSize) size;
