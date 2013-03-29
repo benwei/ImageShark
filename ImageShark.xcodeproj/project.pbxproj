@@ -22,6 +22,7 @@
 		5138B9471703EC8A00525237 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5138B9451703EC8A00525237 /* QuartzCore.framework */; };
 		5138B94A1703ECA000525237 /* SOImageHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 5138B9491703ECA000525237 /* SOImageHelper.m */; };
 		5138B9511704225900525237 /* SODragDropImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5138B9501704225900525237 /* SODragDropImageView.m */; };
+		513953FE1705B1EC00A3CE9F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 513953FC1705B1EC00A3CE9F /* Localizable.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +62,7 @@
 		5138B9491703ECA000525237 /* SOImageHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SOImageHelper.m; path = ImageShark/SOImageHelper.m; sourceTree = "<group>"; };
 		5138B94F1704225900525237 /* SODragDropImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SODragDropImageView.h; path = ImageShark/SODragDropImageView.h; sourceTree = "<group>"; };
 		5138B9501704225900525237 /* SODragDropImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SODragDropImageView.m; path = ImageShark/SODragDropImageView.m; sourceTree = "<group>"; };
+		513953FD1705B1EC00A3CE9F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,6 +145,7 @@
 		5138B9141703EC0D00525237 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				513953FC1705B1EC00A3CE9F /* Localizable.strings */,
 				5138B9151703EC0D00525237 /* ImageShark-Info.plist */,
 				5138B9161703EC0D00525237 /* InfoPlist.strings */,
 				5138B9191703EC0D00525237 /* main.m */,
@@ -256,6 +259,7 @@
 				5138B9181703EC0D00525237 /* InfoPlist.strings in Resources */,
 				5138B91E1703EC0D00525237 /* Credits.rtf in Resources */,
 				5138B9241703EC0D00525237 /* MainMenu.xib in Resources */,
+				513953FE1705B1EC00A3CE9F /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -347,6 +351,14 @@
 				5138B9371703EC0D00525237 /* en */,
 			);
 			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		513953FC1705B1EC00A3CE9F /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				513953FD1705B1EC00A3CE9F /* en */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
