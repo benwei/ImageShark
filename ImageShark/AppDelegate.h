@@ -14,6 +14,7 @@
 @interface AppDelegate : NSObject <NSApplicationDelegate> {
     IBOutlet IKImageView *  _imageView;
     IBOutlet NSTextField *  _detail;
+    IBOutlet NSTextField *  _exportPath;
     NSDictionary*           _imageProperties;
     NSString*               _imageUTType;
     NSDictionary*           _exif;
@@ -27,5 +28,6 @@
 @property (strong, nonatomic)           NSString *dispMessages;
 
 - (void)openImageURL: (NSURL*)url;
+- (IBAction) browseExportFolder:(id)sender;
 
 @end
