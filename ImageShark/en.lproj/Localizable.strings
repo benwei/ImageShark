@@ -1,0 +1,16 @@
+/* 
+  ImageShark.strings
+  ImageShark
+
+  Created by ben wei on 3/29/13.
+  Copyright (c) 2013 Staros Mobi. All rights reserved.
+*/
+"Introduction" = "open your photo first to display EXIF and GPS info\r\
+* load new image by [File]->[Open]\r\
+- select your file. if image loads successfully and exif or gps exists,\r\
+info will be right-side text field.\r\
+* export thumbnail by [File]->[Export]\r\
+- if works, output info in text field and thumbnail in\r\
+~/Desktop/<filename>_<width>x<height>.jpg";
+
+"Export" = "test";
