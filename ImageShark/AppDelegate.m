@@ -20,25 +20,16 @@
 @synthesize managedObjectContext = _managedObjectContext;
 
 
-
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
     helper = nil;
     targetExportPath = [NSString stringWithFormat:@"%@/Desktop", NSHomeDirectory()];
     [_exportPath setStringValue:targetExportPath];
-    _dispMessages = @"open your photo first to display EXIF and GPS info\r\
-* load new image by [File]->[Open]\r\
- - select your file. if image loads successfully and exif or gps exists,\r\
-   info will be right-side text field.\r\
-* export thumbnail by [File]->[Export]\r\
- - if works, output info in text field and thumbnail in\r\
-   ~/Desktop/<filename>_<width>x<height>.jpg";
+    _dispMessages = NSLocalizedString(@"Introduction", @"");
 
     [_detail setStringValue:_dispMessages];
 }
 
-// Returns the directory the application uses to store the Core Data store file.
-// This code uses a directory named "mobi.staros.apps.ImageShark" in the user's Application Support directory.
 - (NSURL *)applicationFilesDirectory
 {
     NSFileManager *fileManager = [NSFileManager defaultManager];
@@ -46,7 +37,6 @@
     return [appSupportURL URLByAppendingPathComponent:@"mobi.staros.apps.ImageShark"];
 }
 
-// Creates if necessary and returns the managed object model for the application.
 - (NSManagedObjectModel *)managedObjectModel
 {
     if (_managedObjectModel) {
@@ -58,7 +48,6 @@
     return _managedObjectModel;
 }
 
-// Returns the persistent store coordinator for the application. This implementation creates and return a coordinator, having added the store for the application to it. (The directory for the store is created, if necessary.)
 - (NSPersistentStoreCoordinator *)persistentStoreCoordinator
 {
     if (_persistentStoreCoordinator) {
@@ -111,7 +100,6 @@
     return _persistentStoreCoordinator;
 }
 
-// Returns the managed object context for the application (which is already bound to the persistent store coordinator for the application.) 
 - (NSManagedObjectContext *)managedObjectContext
 {
     if (_managedObjectContext) {
@@ -133,7 +121,6 @@
     return _managedObjectContext;
 }
 
-// Returns the NSUndoManager for the application. In this case, the manager returned is that of the managed object context for the application.
 - (NSUndoManager *)windowWillReturnUndoManager:(NSWindow *)window
 {
     return [[self managedObjectContext] undoManager];
@@ -141,8 +128,6 @@
 
 - (NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication *)sender
 {
-    // Save changes in the application's managed object context before the application terminates.
-    
     if (!_managedObjectContext) {
         return NSTerminateNow;
     }
@@ -158,8 +143,6 @@
     
     NSError *error = nil;
     if (![[self managedObjectContext] save:&error]) {
-
-        // Customize this code block to include application-specific recovery steps.              
         BOOL result = [sender presentError:error];
         if (result) {
             return NSTerminateCancel;
@@ -190,19 +173,15 @@
 
 - (IBAction)openImage: (id)sender
 {
-    // present open panel...
-    
     NSString *    extensions = @"tiff/tif/TIFF/TIF/jpg/jpeg/JPG/JPEG/png/PNG";
     NSArray *     types = [extensions pathComponents];
     
-	// Let the user choose an output file, then start the process of writing samples
 	NSOpenPanel *openPanel = [NSOpenPanel openPanel];
-	[openPanel setAllowedFileTypes:types/*[NSArray arrayWithObject:AVFileTypeQuickTimeMovie]*/];
+	[openPanel setAllowedFileTypes:types];
 	[openPanel setCanSelectHiddenExtension:YES];
 	[openPanel beginSheetModalForWindow:_window completionHandler:^(NSInteger result) {
 		if (result == NSFileHandlingPanelOKButton)
         {
-            // user did select an image...
             fileUrl = [openPanel URL];
             [self openImageURL: fileUrl];
         }
