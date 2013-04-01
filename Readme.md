@@ -31,6 +31,17 @@ format: {filename}_{width}x{height}.jpg
 ex: ~/Desktop/{filename}_{width}x{height}.jpg
 ```
 
+### Build
+
+* install Cocoa Pods [CocoaPods](http://cocoapods.org) 
+* build with Terminal
+
+  ```
+  $	make
+  ```
+* output
+  ``` build/Release/ImageShark.app ```
+
 ## Contributing
 Feel free to fork this repo and commit your enhances. There is a list of Authors file for all contributors
 
