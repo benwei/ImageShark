@@ -23,6 +23,7 @@
 		5138B94A1703ECA000525237 /* SOImageHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 5138B9491703ECA000525237 /* SOImageHelper.m */; };
 		5138B9511704225900525237 /* SODragDropImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5138B9501704225900525237 /* SODragDropImageView.m */; };
 		513953FE1705B1EC00A3CE9F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 513953FC1705B1EC00A3CE9F /* Localizable.strings */; };
+		51A2EE171709ABEF001D255A /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 51A2EE161709ABEF001D255A /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +37,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4516206FE71A4DEFAC05C6E2 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 		5138B90A1703EC0D00525237 /* ImageShark.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImageShark.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5138B90D1703EC0D00525237 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		5138B9101703EC0D00525237 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -63,6 +65,7 @@
 		5138B94F1704225900525237 /* SODragDropImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SODragDropImageView.h; path = ImageShark/SODragDropImageView.h; sourceTree = "<group>"; };
 		5138B9501704225900525237 /* SODragDropImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SODragDropImageView.m; path = ImageShark/SODragDropImageView.m; sourceTree = "<group>"; };
 		513953FD1705B1EC00A3CE9F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		51A2EE161709ABEF001D255A /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = Pods/build/Debug/libPods.a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +73,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				51A2EE171709ABEF001D255A /* libPods.a in Frameworks */,
 				5138B9461703EC8A00525237 /* Quartz.framework in Frameworks */,
 				5138B9471703EC8A00525237 /* QuartzCore.framework in Frameworks */,
 				5138B90E1703EC0D00525237 /* Cocoa.framework in Frameworks */,
@@ -96,6 +100,7 @@
 				5138B9331703EC0D00525237 /* ImageSharkTests */,
 				5138B90C1703EC0D00525237 /* Frameworks */,
 				5138B90B1703EC0D00525237 /* Products */,
+				4516206FE71A4DEFAC05C6E2 /* Pods.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -111,6 +116,7 @@
 		5138B90C1703EC0D00525237 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				51A2EE161709ABEF001D255A /* libPods.a */,
 				5138B9441703EC8A00525237 /* Quartz.framework */,
 				5138B9451703EC8A00525237 /* QuartzCore.framework */,
 				5138B90D1703EC0D00525237 /* Cocoa.framework */,
@@ -195,6 +201,7 @@
 				5138B9061703EC0D00525237 /* Sources */,
 				5138B9071703EC0D00525237 /* Frameworks */,
 				5138B9081703EC0D00525237 /* Resources */,
+				465A76150C90416EBD2BC7DE /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -274,6 +281,20 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		465A76150C90416EBD2BC7DE /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+		};
 		5138B92B1703EC0D00525237 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -425,11 +446,13 @@
 		};
 		5138B93F1703EC0D00525237 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4516206FE71A4DEFAC05C6E2 /* Pods.xcconfig */;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ImageShark/ImageShark-Prefix.pch";
 				INFOPLIST_FILE = "ImageShark/ImageShark-Info.plist";
+				LIBRARY_SEARCH_PATHS = "${PODS_ROOT}/build/${CONFIGURATION}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -437,11 +460,13 @@
 		};
 		5138B9401703EC0D00525237 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4516206FE71A4DEFAC05C6E2 /* Pods.xcconfig */;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ImageShark/ImageShark-Prefix.pch";
 				INFOPLIST_FILE = "ImageShark/ImageShark-Info.plist";
+				LIBRARY_SEARCH_PATHS = "${PODS_ROOT}/build/${CONFIGURATION}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

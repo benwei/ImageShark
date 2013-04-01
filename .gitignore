@@ -1,8 +1,10 @@
 
 # Xcode Config
 *.xcuserdatad
-*.xcworkspacedata
 *.xcuserstate
+xcuserstate
 
 # build
 build
+Pods/
+Podfile.lock
