@@ -6,6 +6,7 @@
 * extract exif and gps info
 * convert jpg thumbnail in width or height in 512
 * Single File drag and drop
+* select export directory [Menu]->[Settings]->[Select Export Folder]
 
 ## Howto
 
