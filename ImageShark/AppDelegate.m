@@ -9,21 +9,29 @@
 #import "SOImageHelper.h"
 #import "AppDelegate.h"
 
+#pragma mark -------- AppDelegate
+
 @implementation AppDelegate {
     SOImageHelper *helper;
     NSURL *fileUrl;
     NSString *targetExportPath;
+    NSUserDefaults *defaults;
 }
 
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
 @synthesize managedObjectModel = _managedObjectModel;
 @synthesize managedObjectContext = _managedObjectContext;
 
-
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
+    defaults = [NSUserDefaults standardUserDefaults];
+
     helper = nil;
-    targetExportPath = [NSString stringWithFormat:@"%@/Desktop", NSHomeDirectory()];
+    targetExportPath = [defaults objectForKey:@"exportFolder"];
+    if (!targetExportPath || [targetExportPath length] == 0) {
+        targetExportPath = [NSString stringWithFormat:@"%@/Desktop", NSHomeDirectory()];
+    }
+
     [_exportPath setStringValue:targetExportPath];
     _dispMessages = NSLocalizedString(@"Introduction", @"");
 
@@ -187,6 +195,30 @@
         }
 	}];
 }
+
+
+- (IBAction) selectExportFolder: (id)sender
+{
+    
+    NSOpenPanel *savePanel = [NSOpenPanel openPanel];
+    [savePanel setDirectoryURL:fileUrl];
+    [savePanel setCanChooseDirectories: YES];
+    [savePanel setCanCreateDirectories: YES];
+    [savePanel setCanChooseFiles: NO];
+    [savePanel setPrompt:@"Save"];
+    
+	[savePanel beginSheetModalForWindow:_window completionHandler:^(NSInteger result) {
+		if (result == NSFileHandlingPanelOKButton)
+        {
+            fileUrl = [savePanel URL];
+            targetExportPath = [fileUrl path];
+            NSLog(@"selected Export Folder: %@", targetExportPath);
+            [defaults setObject:targetExportPath forKey:@"exportFolder"];
+            [_exportPath setStringValue:targetExportPath];
+        }
+	}];
+}
+
 
 - (void)openImageURL: (NSURL*)url
 {
