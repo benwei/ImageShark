@@ -2,11 +2,17 @@
 
  ImageShark, a prototype OSX app is small image tool.
 
+![Demo1](docs/ImageSharkDemo1.jpg)
+
 ### Features
 * extract exif and gps info
 * convert jpg thumbnail in width or height in 512
 * Single File drag and drop
 * select export directory [Menu]->[Settings]->[Select Export Folder]
+
+## History
+
+- 2026 revise to build with latest Xcode 26.0.1 
 
 ## Howto
 

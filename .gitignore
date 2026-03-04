@@ -1,8 +1,9 @@
-
+.DS_Store
 # Xcode Config
 *.xcuserdatad
 *.xcuserstate
 xcuserstate
+xcshareddata
 
 # build
 build

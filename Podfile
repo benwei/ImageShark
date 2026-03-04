@@ -1,3 +1,9 @@
-platform :osx,10.7
 
-pod 'NSLogger'
+target 'ImageShark' do 
+  project 'ImageShark.xcworkspace'
+end
+
+target 'ImageSharkTests' do
+  # Test-specific pods
+end
+
